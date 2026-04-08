@@ -52,10 +52,10 @@ local live_grep_args = function(opts)
       return nil
     end
 
-    local args = vim.tbl_flatten({ tbl_clone(opts.vimgrep_arguments), tbl_clone(additional_args) })
+    local args = vim.iter({ tbl_clone(opts.vimgrep_arguments), tbl_clone(additional_args) }):flatten():totable()
     local prompt_parts = prompt_parser.parse(prompt, opts.auto_quoting)
 
-    local cmd = vim.tbl_flatten({ args, prompt_parts, opts.search_dirs })
+    local cmd = vim.iter({ args, prompt_parts, opts.search_dirs }):flatten():totable()
     return cmd
   end
 
